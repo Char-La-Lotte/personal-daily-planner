@@ -1,6 +1,6 @@
 import { signOut } from 'firebase/auth'
 import {
-  BarChart3, CalendarDays, ChevronDown, Home, Settings, X,
+  BarChart3, CalendarCheck, CalendarDays, ChevronDown, Home, Settings, X,
 } from 'lucide-react'
 import { auth } from '../firebase'
 import { GoogleLogoIcon, PlannerLogoIcon } from './Icons'
@@ -8,6 +8,7 @@ import { GoogleLogoIcon, PlannerLogoIcon } from './Icons'
 const ITEMS = [
   { id: 'dashboard', label: 'Trang chủ', icon: Home },
   { id: 'calendar', label: 'Lịch tháng', icon: CalendarDays },
+  { id: 'attendance', label: 'Chấm công', icon: CalendarCheck },
   { id: 'statistics', label: 'Thống kê', icon: BarChart3 },
   { id: 'settings', label: 'Cài đặt', icon: Settings },
 ]

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import {
-  BarChart3, Bell, CalendarDays, Home, Menu, Moon, Plus, Settings as SettingsIcon, Sun,
+  BarChart3, Bell, CalendarCheck, CalendarDays, Home, Menu, Moon, Plus, Settings as SettingsIcon, Sun,
 } from 'lucide-react'
 import { auth } from './firebase'
-import { useTasks, useTheme } from './hooks'
+import { useAttendance, useTasks, useTheme } from './hooks'
 import { todayStr } from './utils'
 import { PlannerLogoIcon, SplashLoader } from './components/Icons'
 import Sidebar from './components/Sidebar'
@@ -13,6 +13,7 @@ import WeatherWidget from './components/WeatherWidget'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Calendar from './pages/Calendar'
+import Attendance from './pages/Attendance'
 import Statistics from './pages/Statistics'
 import Settings from './pages/Settings'
 
@@ -32,6 +33,7 @@ function Planner({ user, theme, setTheme }) {
   const [modal, setModal] = useState(null) // { task?, date }
   const [drawerOpen, setDrawerOpen] = useState(false)
   const { tasks, loading, dbError, add, update, remove } = useTasks(user.uid)
+  const attendance = useAttendance(user.uid)
 
   const today = todayStr()
   const pendingTodayCount = tasks.filter(
@@ -166,6 +168,12 @@ function Planner({ user, theme, setTheme }) {
                   onAdd={(d) => setModal({ date: d })}
                 />
               )}
+              {page === 'attendance' && (
+                <Attendance
+                  attendance={attendance}
+                  onNavigate={navigate}
+                />
+              )}
               {page === 'statistics' && <Statistics tasks={tasks} />}
               {page === 'settings' && (
                 <Settings
@@ -174,6 +182,7 @@ function Planner({ user, theme, setTheme }) {
                   setTheme={setTheme}
                   tasks={tasks}
                   onRemove={remove}
+                  attendance={attendance}
                 />
               )}
             </div>
@@ -196,6 +205,14 @@ function Planner({ user, theme, setTheme }) {
           >
             <CalendarDays size={19} />
             <span>Lịch tháng</span>
+          </button>
+          <button
+            type="button"
+            className={page === 'attendance' ? 'active' : ''}
+            onClick={() => navigate('attendance')}
+          >
+            <CalendarCheck size={19} />
+            <span>Chấm công</span>
           </button>
           <button
             type="button"
