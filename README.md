@@ -7,7 +7,7 @@
 ![Firebase](https://img.shields.io/badge/Firebase-10.14-FFCA28?logo=firebase&logoColor=black)
 ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-222222?logo=github)
 
-🔗 **Trải nghiệm trực tiếp (Live Demo):** [https://mt1242.github.io/personal-daily-planner/](https://mt1242.github.io/personal-daily-planner/)
+🔗 **Trải nghiệm trực tiếp (Live Demo):** [https://Char-La-Lotte.github.io/personal-daily-planner/](https://Char-La-Lotte.github.io/personal-daily-planner/)
 
 ---
 
@@ -56,6 +56,11 @@
 - Kết hợp **Cloud Firestore** và **LocalStorage Backup** giúp thao tác phản hồi tức thì (`0ms` độ trễ), hoạt động ổn định ngay cả khi mạng chập chờn.
 - Hỗ trợ **Xuất file sao lưu (`.json`)**, dọn dẹp nhanh công việc đã xong hoặc xóa việc trùng lặp trong mục **Cài đặt**.
 
+### 7. ⏱️ Kiểm tra công & Chấm công thông minh
+- **Check-in / Check-out 1 chạm:** Đồng hồ số thời gian thực, tự động đối chiếu với cấu hình ca làm việc để tính toán trạng thái (*Đúng giờ*, *Đi muộn*, *Về sớm*, *Nghỉ phép*) và quy đổi ra ngày công (`1.0 công`, `0.5 công`).
+- **Cấu hình ngày làm việc linh hoạt:** Tuỳ chỉnh các thứ đi làm trong tuần (`T2` → `CN`), giờ vào/tan ca chuẩn, giờ nghỉ trưa, số giờ tính đủ 1 công và số phút cho phép đi trễ trong mục **Cài đặt**.
+- **Bảng lịch công & Xuất báo cáo Excel (`.csv`):** Theo dõi tổng công tích lũy trong tháng, điều chỉnh/giải trình công cho từng ngày và xuất bảng kê chi tiết ra file `.csv`.
+
 ---
 
 ## 🛠️ Công nghệ sử dụng
@@ -93,12 +98,13 @@ personal-daily-planner/
 │   ├── pages/
 │   │   ├── Dashboard.jsx       # Trang chủ (Banner, KPI, Lịch trình, Lịch mini, Tuần)
 │   │   ├── Calendar.jsx        # Trang lịch chi tiết theo Tháng / Tuần
+│   │   ├── Attendance.jsx      # Trang Kiểm tra công, Chấm công & Xuất bảng kê CSV
 │   │   ├── Statistics.jsx      # Trang biểu đồ thống kê hiệu suất
-│   │   ├── Settings.jsx        # Trang cài đặt tài khoản, giao diện & sao lưu JSON
+│   │   ├── Settings.jsx        # Trang cài đặt tài khoản, ca làm việc & sao lưu JSON
 │   │   └── Login.jsx           # Màn hình giới thiệu & đăng nhập Google
 │   ├── App.jsx                 # Khung ứng dụng chính, Topbar & điều hướng
 │   ├── firebase.js             # Khởi tạo kết nối Firebase Auth & Firestore
-│   ├── hooks.js                # Custom hooks (useTheme, useTasks đồng bộ kép)
+│   ├── hooks.js                # Custom hooks (useTheme, useTasks, useAttendance)
 │   ├── utils.js                # Các hàm xử lý ngày tháng, sắp xếp & hằng số
 │   ├── styles.css              # Toàn bộ hệ thống giao diện, animation & responsive
 │   └── main.jsx                # Điểm khởi chạy ứng dụng React
@@ -132,7 +138,7 @@ VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
 
 ### Bước 3: Thiết lập dịch vụ trên Firebase Console
 1. **Authentication:** Vào **Authentication → Sign-in method** → Bật nhà cung cấp **Google**.
-2. **Authorized Domains:** Vào **Authentication → Settings → Authorized domains** → Đảm bảo có `localhost` và tên miền GitHub Pages của bạn (ví dụ `mt1242.github.io`).
+2. **Authorized Domains:** Vào **Authentication → Settings → Authorized domains** → Đảm bảo có `localhost` và tên miền GitHub Pages của bạn (ví dụ `Char-La-Lotte.github.io`).
 3. **Cloud Firestore:** Vào **Firestore Database** → Tạo database → Mở tab **Rules** và dán nội dung từ file `firestore.rules` rồi nhấn **Publish**:
    ```text
    rules_version = '2';
